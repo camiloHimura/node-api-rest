@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParse = require("body-parser");
+const cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(cors());
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({ extended: true }));
 
