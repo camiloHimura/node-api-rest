@@ -20,8 +20,24 @@ App.use(bodyParse.json());
 App.use(myGeneralMiddleWare);
 App.use(bodyParse.urlencoded({ extended: true }));
 
+//Exact
 App.get("/", (req, res) =>{
     res.send({message: "Hi I'm get"})
+})
+
+//Regex
+App.get(/^\/camilo/, (req, res) => {
+    res.send({message: "Hi I'm get Regex"})
+})
+
+//Glob
+App.get("/client/*", (req, res) =>{
+    res.send({message: "Hi I'm get Glob"})
+})
+
+//Paramethers
+App.get("/user/:name", (req, res) =>{
+    res.send({message: "Hi I'm get Paramethers"})
 })
 
 App.post("/", [mySpecificMiddleWare], (req, res) => {
