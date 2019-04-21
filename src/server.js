@@ -1,11 +1,13 @@
-const express = require("express");
-const bodyParse = require("body-parser");
 const cors = require("cors");
+const express = require("express");
+const { json, urlencoded } = require("body-parser");
 
-const apiRouter = require("./apiRouter");
+const { port } = require("./config");
+const apiRouter = require("./item/item.router");
+const { connect } = require("./utils/db");
+
 
 const App = express();
-const PORT = process.env.PORT || 8080;
 
 //Custom MiddleWare
 const myGeneralMiddleWare = (req, res, next) => {
@@ -20,9 +22,9 @@ const mySpecificMiddleWare = (req, res, next) => {
 
 //General MiddleWares
 App.use(cors());
-App.use(bodyParse.json());
+App.use(json());
 App.use(myGeneralMiddleWare);
-App.use(bodyParse.urlencoded({ extended: true }));
+App.use(urlencoded({ extended: true }));
 
 //Exact
 //Router Order
@@ -60,7 +62,13 @@ App.post("/", [mySpecificMiddleWare], (req, res) => {
 App.use("/api", apiRouter)
 
 module.exports = {
-                    start(){
-                        App.listen(PORT, () => console.log(`I'm node listen port ${PORT}`))
+                    start: async () =>{
+                        try{
+                            await connect();
+                            App.listen(port, () => console.log(`I'm node listen port ${port}`))
+                        }
+                        catch(e){
+                            console.log(e)
+                        }
                     }
                 };
