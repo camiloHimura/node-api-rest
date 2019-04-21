@@ -1,16 +1,12 @@
 const Item  = require("./item.model");
+const generalCrud = require("../utils/generalCrud")
 
-module.exports = {
-    execute: async () => {
-        const item = await Item.create({
-                        name: "sony xperia xz1",
-                        description: "This is a test",
-                        state: "stock",
-                        quantity: 10
-                    });
-        
-        console.log("item", item)
-    }
+const format = data => {
+    let {_id, name, description, state, quantity} = data; 
+    return {id: _id, name, description, state, quantity}
 }
 
-/* const execute  */
+const arrayFormat = data => data.reduce((accum, current) => [...accum, format(current)], [])
+
+module.exports = generalCrud(Item, {format, arrayFormat})
+

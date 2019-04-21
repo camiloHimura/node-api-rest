@@ -16,7 +16,9 @@
   "keywords": [
     "node",
     "api",
-    "rest"
+    "rest",
+    "express",
+    "nodemon"
   ],
   "author": "Camilo Colorado (camiloHimura)",
   "license": "ISC",

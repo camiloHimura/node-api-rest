@@ -2,10 +2,10 @@ const cors = require("cors");
 const express = require("express");
 const { json, urlencoded } = require("body-parser");
 
-const { port } = require("./config");
 const apiRouter = require("./item/item.router");
-const { connect } = require("./utils/db");
 
+const { port } = require("./config");
+const { connect } = require("./utils/db");
 
 const App = express();
 
@@ -59,7 +59,7 @@ App.post("/", [mySpecificMiddleWare], (req, res) => {
 })
 
 //delegate to a router
-App.use("/api", apiRouter)
+App.use("/api/item", apiRouter)
 
 module.exports = {
                     start: async () =>{
