@@ -1,40 +1,27 @@
 {
-  "name": "node-api-rest",
+  "name": "mongodb-intro",
   "version": "1.0.0",
-  "description": "basic api node",
+  "description": "mongodb, node",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=dev nodemon --exec npm start",
-    "start": "npm run build && node dist/index.js",
-    "build": "rimraf dist && babel src -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/camiloHimura/node-api-rest.git"
+    "url": "sdfsdf"
   },
   "keywords": [
-    "node",
-    "api",
-    "rest",
-    "express",
-    "nodemon"
+    "mongo"
   ],
-  "author": "Camilo Colorado (camiloHimura)",
+  "author": "cmailo colmenares (cmailoHimura)",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mongodb": "^3.2.3",
-    "mongoose": "^5.5.2"
+    "mongoose": "^5.5.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-class-properties": "^7.4.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
     "nodemon": "^1.18.11"
   }
 }

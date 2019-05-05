@@ -1,9 +1,0 @@
-{
-    "watch": ["src"],
-    "delay": "0",
-    "verbose": true,
-    "ignore": [
-        ".git",
-        "node_modules/**/node_modules"
-    ]
-}

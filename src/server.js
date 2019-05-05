@@ -1,74 +1,30 @@
-const cors = require("cors");
 const express = require("express");
-const { json, urlencoded } = require("body-parser");
-
-const apiRouter = require("./item/item.router");
-
-const { port } = require("./config");
-const { connect } = require("./utils/db");
+const bodyParse = require("body-parser");
+const cors = require("cors");
 
 const App = express();
 
-//Custom MiddleWare
-const myGeneralMiddleWare = (req, res, next) => {
-    req.body = Object.assign(req.body, {added: "This was added by myGeneralMiddleWare"});
-    next();
-}
-
-const mySpecificMiddleWare = (req, res, next) => {
-    req.body = Object.assign(req.body, {addedSpecific: "This was added by a mySpecificMiddleWare"});
-    next();
-}
-
-//General MiddleWares
+App.use(bodyParse())
 App.use(cors());
-App.use(json());
-App.use(myGeneralMiddleWare);
-App.use(urlencoded({ extended: true }));
-
-//Exact
-//Router Order
-App.get("/", (req, res, next) => {
-    //res.send({message: "Hi I'm get"})
-    next()
-})
 
 App.get("/", (req, res) => {
-    res.send({message: "Hi I'm the second get"})
+    console.log("sending get", req.params)
+    res.status(200).send({
+        message: "I'm a get rest",
+        data: req.params,
+    })
 })
 
-//Regex
-App.get(/^\/camilo/, (req, res) => {
-    res.send({message: "Hi I'm get Regex"})
+App.post("/", (req, res) => {
+    console.log("sending post")
+    res.status(200).send({
+        message: "I'm a pos rest",
+        data: req.body
+    })
 })
-
-//Glob
-App.get("/client/*", (req, res) =>{
-    res.send({message: "Hi I'm get Glob"})
-})
-
-//Paramethers
-App.get("/user/:name", (req, res) =>{
-    res.send({message: "Hi I'm get Paramethers"})
-})
-
-//Specific MiddleWare
-App.post("/", [mySpecificMiddleWare], (req, res) => {
-    console.log(req.body)
-    res.send({message: "Hi I'm post with nodemon custom config"})
-})
-
-//delegate to a router
-App.use("/api/item", apiRouter)
 
 module.exports = {
-                    start: async () =>{
-                        try{
-                            await connect();
-                            App.listen(port, () => console.log(`I'm node listen port ${port}`))
-                        }
-                        catch(e){
-                            console.log(e)
-                        }
-                    }
-                };
+    start(){
+        App.listen(3000, () => console.log("running 8080"))
+    }
+}
